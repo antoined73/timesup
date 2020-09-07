@@ -12,7 +12,7 @@
               // OR YOU WON'T BE ABLE TO DECLARE CONST FUNCTIONS
 
 const fs = require('fs');
-const WORDS_CONSTANTS = require('../constants/words-constants');
+const WORDS_CONSTANTS = require('../constants/words-constants').WORDS_FILES;
 
 /**
  * Gets all words in static files from /api/app/resources/words
