@@ -11,33 +11,51 @@
 "use strict"; // DON'T FORGET THIS IN THE MODEL FILES,
               // OR YOU WON'T BE ABLE TO DECLARE CONST FUNCTIONS
 
-/**
- * Hard coded list of user to mock a DB
- */
-let customers = [
-  { "id": 1, "name": "Jane Doe" },
-  { "id": 2, "name": "John Doe" }
-];
+const fs = require('fs');
+const WORDS_CONSTANTS = require('../constants/words-constants');
 
 /**
- * This function simulate the fact we use a DB by being asynchronous. Should be replace by a real call to a DB.
+ * Gets all words in static files from /api/app/resources/words
  */
-const findAll = () =>  {
-  return new Promise(resolve => {
-    setImmediate(() => {
-      resolve(customers)
-    })
-  })
+const getAllWords = () =>  {
+  let wordList = [];
+  for (let wordFile of WORDS_CONSTANTS) {
+    fs.readFile(wordFile.category, (err, words) => {
+      if (err) {
+        throw err;
+      }
+      else {
+        wordList.push(words);
+      }
+    });
+
+    return wordList;
+  }
 };
 
 /**
- * This function add the customer to the hard coded list of words
+ * Gets a list of words from a given category
  *
- * @param {json} customer JSON sent to add to the list of user
+ * @param category the category of words to retrieve. Check
+ * the file /api/app/constants/word-constants.js to see which category
+ * is available
  */
-const addCustomer = customer => {
-  customers.push(customer)
+const getWordsFromCategory = (category) => {
+  if (!WORDS_CONSTANTS.some(c => c === category)) {
+    throw new Error("Provided category doesn't exist");
+  }
+  else {
+    let wordFile = WORDS_CONSTANTS.find(c => c === category);
+    fs.readFile(wordFile.category, (err, words) => {
+      if (err) {
+        throw err;
+      }
+      else {
+        return words;
+      }
+    });
+  }
 };
 
-exports.findAll = findAll;
-exports.addCustomer = addCustomer;
+exports.getAllWords = getAllWords;
+exports.getWordsFromCategory = getWordsFromCategory;

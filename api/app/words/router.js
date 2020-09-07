@@ -13,7 +13,7 @@
  * @author Maxime Flament
  */
 
-let customer = require('./words-model');
+let wordsModel = require('./words-model');
 let log = require('bole')('words/router');
 let router = require('express').Router();
 
@@ -24,8 +24,8 @@ let router = require('express').Router();
  * @param {express.Response}  res   Express HTTP response
  */
 const getCustomers = async (req, res) => {
-  let customers = await customer.findAll();
-  res.json(customers)
+  let words = await wordsModel.getAllWords();
+  res.json(words);
 };
 
 /**
