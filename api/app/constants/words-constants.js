@@ -24,3 +24,7 @@ let WORDS_FILES = [
     file: "sports.txt"
   }
 ];
+
+module.exports = {
+  WORDS_FILES
+}
