@@ -1,25 +1,25 @@
 <template>
-<div class="column is-paddingless is-one-third perspective">
-    <div 
-    v-for="(wordBank, index) in wordBanks" :key="index"
-    @click="wordBankClicked()">
-        <p class="title has-text-white project-thumbail-title">{{wordBank.title}}</p>
-    </div>
-    {{this.$store.wordsBanks}}
-    </div>
+<div class="column">
+    <a 
+    v-for="(wordBank, index) in this.banks" :key="index"
+    @click="wordBankClicked(wordBank.id)"
+    class="button is-link is-fullwidth is-medium my-1">
+    {{wordBank.title}}
+    </a>
+</div>
 </template>
 
 <script>
 export default {
   name: 'WordsView',
   computed : {
-        wordBanks(){
-            return this.$store.wordsBanks;
+        banks(){
+            return this.$store.state.words.wordBanks;
         }
     },
     methods : {
-        wordBankClicked() {
-            //console.log("hello !");
+        wordBankClicked(wordBankId) {
+            console.log("Wordbank choosen : "+ this.$store.getters['words/getWordBankByWordBankId'](wordBankId).title);
         }
     }
 }

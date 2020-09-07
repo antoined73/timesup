@@ -1,7 +1,7 @@
 const words = {
     namespaced: true,
     state: {
-        wordsBanks : [
+        wordBanks : [
             {
                 id: 0,
                 title: "Actions",
@@ -38,7 +38,7 @@ const words = {
     actions: {},
     getters: {
         getWordBankByWordBankId: (state) => (wordBankId) => {
-            var wordBank = state.wordsBanks.find(wb => wb.id === wordBankId);
+            var wordBank = state.wordBanks.find(wb => wb.id === wordBankId);
             return wordBank;
         }
     }

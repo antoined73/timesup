@@ -7,7 +7,7 @@ import wordsModule from './modules/words.js'
 
 const store = new Vuex.Store({
    modules : {
-        projects : wordsModule
+        words : wordsModule
    }
 })
 
