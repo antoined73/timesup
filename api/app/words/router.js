@@ -23,7 +23,7 @@ let router = require('express').Router();
  * @param {express.Request}   req   Express HTTP request
  * @param {express.Response}  res   Express HTTP response
  */
-const getCustomers = async (req, res) => {
+const getAllWords = async (req, res) => {
   let words = await wordsModel.getAllWords();
   res.json(words);
 };
@@ -34,15 +34,20 @@ const getCustomers = async (req, res) => {
  * @param {express.Request}   req   Express HTTP request
  * @param {express.Response}  res   Express HTTP response
  */
-const createCustomer = (req, res) => {
-  customer.addCustomer(req.body);
-  res.status(201).send()
+const getWordsByCategory = async (req, res) => {
+ if (req.body && req.body.category) {
+   let words = await wordsModel.getWordsByCategory(req.body.category);
+   res.status(201).send();
+ }
+ else {
+   res.status(400).send();
+ }
 };
 
 /**
  * Routes handle in the file
  */
-router.post('/words', createCustomer);
-router.get('/words', getCustomers);
+router.post('/words/:category', getWordsByCategory);
+router.get('/words', getAllWords);
 
 module.exports = router;

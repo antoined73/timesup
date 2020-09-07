@@ -40,7 +40,7 @@ const getAllWords = () =>  {
  * the file /api/app/constants/word-constants.js to see which category
  * is available
  */
-const getWordsFromCategory = (category) => {
+const getWordsByCategory = (category) => {
   if (!WORDS_CONSTANTS.some(c => c === category)) {
     throw new Error("Provided category doesn't exist");
   }
@@ -58,4 +58,4 @@ const getWordsFromCategory = (category) => {
 };
 
 exports.getAllWords = getAllWords;
-exports.getWordsFromCategory = getWordsFromCategory;
+exports.getWordsByCategory = getWordsByCategory;
