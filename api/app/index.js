@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 // Load the routes
 app.use(require('./site/router'));
-app.use('/api', require('./customers/router'));
+app.use('/api', require('./words/router'));
 // Repeat the above line for additional model areas
 
 // FINALLY, use any error handlers

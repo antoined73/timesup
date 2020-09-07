@@ -13,8 +13,8 @@
  * @author Maxime Flament
  */
 
-let customer = require('./customer-model');
-let log = require('bole')('customers/router');
+let customer = require('./words-model');
+let log = require('bole')('words/router');
 let router = require('express').Router();
 
 /**
@@ -42,7 +42,7 @@ const createCustomer = (req, res) => {
 /**
  * Routes handle in the file
  */
-router.post('/customers', createCustomer);
-router.get('/customers', getCustomers);
+router.post('/words', createCustomer);
+router.get('/words', getCustomers);
 
 module.exports = router;

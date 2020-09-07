@@ -31,7 +31,7 @@ const findAll = () =>  {
 };
 
 /**
- * This function add the customer to the hard coded list of customers
+ * This function add the customer to the hard coded list of words
  *
  * @param {json} customer JSON sent to add to the list of user
  */
