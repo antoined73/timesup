@@ -1,12 +1,12 @@
 <template>
-<div id="app">
-  <router-view></router-view>
+<div>
+  Rules here
 </div>
 </template>
 
 <script>
 export default {
-  name: 'app',
+  name: 'RulesView',
   components: {
   }
 }

@@ -1,12 +1,12 @@
 <template>
-<div id="app">
-  <router-view></router-view>
+<div>
+  Game here
 </div>
 </template>
 
 <script>
 export default {
-  name: 'app',
+  name: 'GameView',
   components: {
   }
 }
