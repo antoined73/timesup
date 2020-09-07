@@ -4,6 +4,7 @@ Vue.use(VueRouter)
 
 import HomeView from './components/views/HomeView.vue'
 import WordsView from './components/views/WordsView.vue'
+import WordsDetailsView from './components/views/WordsDetailsView.vue'
 import GameView from './components/views/GameView.vue'
 import RulesView from './components/views/RulesView.vue'
 import ErrorView from './components/views/ErrorView.vue'
@@ -12,6 +13,7 @@ const routes = [
   { path: '/', component: HomeView },
   { path: '/game', component: GameView },
   { path: '/words', component: WordsView },
+  { path: '/words/:wordBankId', component: WordsDetailsView },
   { path: '/rules', component: RulesView },
   { path: '*', component: ErrorView }
 ]
