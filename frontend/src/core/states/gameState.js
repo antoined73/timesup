@@ -1,9 +1,16 @@
 class GameState {
     
     constructor() {
+        this.isFinished = false;
     }
 
-    goNext(context){
+    run(context){
+
+    }
+
+    getNextStep(context){
 
     }
 }
+
+export default GameState;
