@@ -24,8 +24,13 @@ let router = require('express').Router();
  * @param {express.Response}  res   Express HTTP response
  */
 const getAllWords = async (req, res) => {
-  let words = await wordsModel.getAllWords();
-  res.json(words);
+  try {
+    let words = await wordsModel.getAllWords();
+    res.json(words);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+
 };
 
 /**
@@ -35,9 +40,13 @@ const getAllWords = async (req, res) => {
  * @param {express.Response}  res   Express HTTP response
  */
 const getWordsByCategory = async (req, res) => {
- if (req.body && req.body.category) {
-   let words = await wordsModel.getWordsByCategory(req.body.category);
-   res.status(201).send();
+ if (req.params && req.params.wordBank) {
+   try {
+     let words = await wordsModel.getWordsByCategory(req.params.wordBank);
+     res.json(words);
+   } catch (err) {
+     res.status(err.statusCode).send();
+   }
  }
  else {
    res.status(400).send();
@@ -47,7 +56,7 @@ const getWordsByCategory = async (req, res) => {
 /**
  * Routes handle in the file
  */
-router.post('/words/:category', getWordsByCategory);
+router.get('/words/:wordBank', getWordsByCategory);
 router.get('/words', getAllWords);
 
 module.exports = router;

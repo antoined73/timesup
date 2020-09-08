@@ -17,43 +17,54 @@ const WORDS_CONSTANTS = require('../constants/words-constants').WORDS_FILES;
 /**
  * Gets all words in static files from /api/app/resources/words
  */
-const getAllWords = () =>  {
+const getAllWords = async () =>  {
   let wordList = [];
+  let filesToRead = 0;
   for (let wordFile of WORDS_CONSTANTS) {
-    fs.readFile(wordFile.category, (err, words) => {
-      if (err) {
-        throw err;
-      }
-      else {
-        wordList.push(words);
+    const lines = fs.readFileSync(wordFile.file, 'utf8').split(/\r?\n/);
+    let wordsFromFile = [];
+    lines.forEach((line) => {
+      if (line !== '') {
+        wordsFromFile.push(line.replace(',', ''));
       }
     });
 
-    return wordList;
+    wordList.push(
+      {
+        wordBank: wordFile.wordBank,
+        words: wordsFromFile
+      }
+    );
   }
+
+  return wordList;
 };
 
 /**
  * Gets a list of words from a given category
  *
- * @param category the category of words to retrieve. Check
+ * @param wordBank the category of words to retrieve. Check
  * the file /api/app/constants/word-constants.js to see which category
  * is available
  */
-const getWordsByCategory = (category) => {
-  if (!WORDS_CONSTANTS.some(c => c === category)) {
-    throw new Error("Provided category doesn't exist");
+const getWordsByCategory = async (wordBank) => {
+  if (!WORDS_CONSTANTS.some(c => c.wordBank.toLowerCase() === wordBank.toLowerCase())) {
+    throw {statusCode: 400};
   }
   else {
-    let wordFile = WORDS_CONSTANTS.find(c => c === category);
-    fs.readFile(wordFile.category, (err, words) => {
-      if (err) {
-        throw err;
-      }
-      else {
-        return words;
+    let wordFile = WORDS_CONSTANTS.find(c => c.wordBank.toLowerCase() === wordBank.toLowerCase());
+    const lines = fs.readFileSync(wordFile.file, 'utf-8').split(/\r?\n/)
+    let wordsFromFile = [];
+
+    lines.forEach((line) => {
+      if (line !== '') {
+        wordsFromFile.push(line.replace(',', ''));
       }
     });
+    return {
+      wordBank: wordBank,
+      words: wordsFromFile
+    };
   }
 };
 
