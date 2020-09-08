@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 
 const words = {
     namespaced: true,
@@ -43,33 +43,36 @@ const words = {
         ]
     },
     mutations: {
-        createWordBank (state, title, description) {
-            state.wordBanks.push({id: uuidv4(), title, description});
+        createWordBank(state, payload) {
+            state.wordBanks.push({id: uuidv4(), title: payload.title, description: payload.description});
         },
-        deleteWordBank (state, wordBankId) {
+        deleteWordBank(state, wordBankId) {
             state.wordBanks = state.wordBanks.filter(wb => wb.id !== wordBankId);
         },
-        renameWordBank (state, wordBankId, newTitle) {
+        renameWordBank(state, payload) {
             state.wordBanks.forEach(wb => {
-                if (wb.id === wordBankId) {
-                    wb.title = newTitle;
+                if (wb.id === payload.wordBankId) {
+                    wb.title = payload.newTitle;
                 }
             });
         },
-        addWordToWordBank (state, wordBankId, word) {
+        addWordToWordBank(state, payload) {
             state.wordBanks.forEach(wb => {
-                if (wb.id === wordBankId) {
+                if (wb.id === payload.wordBankId) {
                     if (!wb.words) {
                         wb.words = [];
                     }
-                    wb.words.push(word);
+                    if (wb.words.indexOf(payload.word) !== -1) {
+                        return;
+                    }
+                    wb.words.push(payload.word);
                 }
             });
         },
-        removeWordFromWordBank (state, wordBankId, word) {
+        removeWordFromWordBank(state, payload) {
             state.wordBanks.forEach(wb => {
-                if (wb.id === wordBankId) {
-                    wb.words = wb.words.filter(w => w !== word);
+                if (wb.id === payload.wordBankId) {
+                    wb.words = wb.words.filter(w => w !== payload.word);
                 }
             });
         }
