@@ -62,7 +62,7 @@ const getWordsByCategory = async (wordBank) => {
       }
     });
     return {
-      wordBank: wordBank,
+      wordBank: wordFile.wordBank,
       words: wordsFromFile
     };
   }
