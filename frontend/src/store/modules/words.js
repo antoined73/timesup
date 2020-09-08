@@ -44,7 +44,12 @@ const words = {
     },
     mutations: {
         createWordBank(state, payload) {
-            state.wordBanks.push({id: uuidv4(), title: payload.title, description: payload.description});
+            state.wordBanks.push({
+                id: uuidv4(),
+                title: payload.title,
+                description: payload.description,
+                words: [],
+            });
         },
         deleteWordBank(state, wordBankId) {
             state.wordBanks = state.wordBanks.filter(wb => wb.id !== wordBankId);
@@ -59,9 +64,6 @@ const words = {
         addWordToWordBank(state, payload) {
             state.wordBanks.forEach(wb => {
                 if (wb.id === payload.wordBankId) {
-                    if (!wb.words) {
-                        wb.words = [];
-                    }
                     if (wb.words.indexOf(payload.word) !== -1) {
                         return;
                     }
