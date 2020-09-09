@@ -18,7 +18,7 @@ const words = {
             },
             {
                 id: '14a22ba1-a20a-4c4c-a345-7bc10e3de948',
-                title: "Sayings",
+                title: "Expressions",
                 description: "Some good old sayingsS",
                 words: [],
             },
@@ -49,6 +49,23 @@ const words = {
                 title: payload.title,
                 description: payload.description,
                 words: [],
+            });
+        },
+        feedWordBankWithApi(state, wordBanksFromApi) {
+            state.wordBanks.forEach(wordBank => {
+                let titleString = JSON.stringify(wordBank.title);
+
+                // Have to do == because wordBank.title is somehow an object and even calling JSON.stringify on it doesn't make it a string
+                let wordBankFromApi = wordBanksFromApi.find(w =>  w.wordBank.toLowerCase() === wordBank.title.toLowerCase());
+                if (wordBankFromApi) {
+                    wordBankFromApi.words.forEach(word => {
+                        wordBank.words.push(word);
+                    });
+                    // Have to call JSON.parse here because arrays and objects are stored as strings in localstorage
+                }
+                else {
+                    window.console.log("Word bank couldn't be found: ", wordBank.title);
+                }
             });
         },
         deleteWordBank(state, wordBankId) {

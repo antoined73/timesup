@@ -27,17 +27,16 @@ export default {
         }
     },
     mounted() {
-      // TODO EXAMPLE ==> REMOVE THIS
-      // THIS RETRIEVES ALL WORDS IN ALL FILES (ALL WORDBANKS)
-      axios.get('http://127.0.0.1:3000/api/words')
-      .then(words => { window.console.log(words) })
-      .catch(err => { window.console.log(err) });
-
-      // TODO EXAMPLE ==> REMOVE THIS
-      // THIS RETRIEVES ALL WORDS IN WORDBANK SPORTS
-      axios.get('http://127.0.0.1:3000/api/words/sports')
-        .then(words => { window.console.log(words) })
-        .catch(err => { window.console.log(err) });
+      if (localStorage.getItem("wordsFromApi") === null) {
+        // TODO EXAMPLE ==> REMOVE THIS
+        // THIS RETRIEVES ALL WORDS IN ALL FILES (ALL WORDBANKS)
+        axios.get('http://127.0.0.1:3000/api/words')
+          .then(words => {
+            window.console.log(words);
+            localStorage.setItem("wordsFromApi", JSON.stringify(words.data));
+          })
+          .catch(err => window.console.log(err));
+      }
     },
     components: {
     },
