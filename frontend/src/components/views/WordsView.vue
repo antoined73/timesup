@@ -35,7 +35,7 @@
       }
     },
     mounted () {
-      if (localStorage.getItem("wordsFromApi")) {
+      if (localStorage.getItem("wordsFromApi") && !this.$store.getters['words/hasFilledWithWordsFromApi']) {
         const wordsFromApi = JSON.parse(localStorage.getItem("wordsFromApi"));
         this.$store.commit("words/feedWordBankWithApi", wordsFromApi)
       }

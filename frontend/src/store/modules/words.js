@@ -40,7 +40,8 @@ const words = {
                 description: "",
                 words: [],
             }
-        ]
+        ],
+        filledWithWordsFromApi: false
     },
     mutations: {
         createWordBank(state, payload) {
@@ -67,6 +68,7 @@ const words = {
                     window.console.log("Word bank couldn't be found: ", wordBank.title);
                 }
             });
+            state.filledWithWordsFromApi = true;
         },
         deleteWordBank(state, wordBankId) {
             state.wordBanks = state.wordBanks.filter(wb => wb.id !== wordBankId);
@@ -101,6 +103,9 @@ const words = {
         getWordBankByWordBankId: (state) => (wordBankId) => {
             var wordBank = state.wordBanks.find(wb => wb.id === wordBankId);
             return wordBank;
+        },
+        hasFilledWithWordsFromApi: (state) => {
+            return state.filledWithWordsFromApi;
         }
     }
 }
