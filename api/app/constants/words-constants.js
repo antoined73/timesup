@@ -2,27 +2,27 @@ const path = require('path');
 
 let WORDS_FILES = [
   {
-    wordBank: 'ACTIONS',
+    wordBank: 'Actions',
     file: path.join(__dirname, '..', 'resources', 'words', 'actions.txt')
   },
   {
-    wordBank: 'ANIMALS',
+    wordBank: 'Animals',
     file: path.join(__dirname, '..', 'resources', 'words', 'animals.txt')
   },
   {
-    wordBank: 'EXPRESSIONS',
+    wordBank: 'Expressions',
     file: path.join(__dirname, '..', 'resources', 'words', 'expressions.txt')
   },
   {
-    wordBank: 'jobs',
+    wordBank: 'Jobs',
     file: path.join(__dirname, '..', 'resources', 'words', 'jobs.txt')
   },
   {
-    wordBank: 'PEOPLE',
+    wordBank: 'People',
     file: path.join(__dirname, '..', 'resources', 'words', 'people.txt')
   },
   {
-    wordBank: 'SPORTS',
+    wordBank: 'Sports',
     file: path.join(__dirname, '..', 'resources', 'words', 'sports.txt')
   }
 ];
