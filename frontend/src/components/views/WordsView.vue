@@ -32,12 +32,21 @@
     data() {
       return {
         wordBankInput: '',
+        wordsFromApi: localStorage.getItem("wordsFromApi")
       }
     },
     mounted () {
-      if (localStorage.getItem("wordsFromApi") && !this.$store.getters['words/hasFilledWithWordsFromApi']) {
-        const wordsFromApi = JSON.parse(localStorage.getItem("wordsFromApi"));
-        this.$store.commit("words/feedWordBankWithApi", wordsFromApi)
+      if (!this.$store.getters['words/hasFilledWithWordsFromApi']) {
+        if (this.wordsFromApi) {
+          const wordsFromApi = JSON.parse(this.wordsFromApi);
+          this.$store.commit("words/feedWordBankWithApi", wordsFromApi)
+        }
+        else {
+          window.addEventListener('words-from-api-stored', (event) => {
+            const wordsFromApi = JSON.parse(event.detail.storage);
+            this.$store.commit("words/feedWordBankWithApi", wordsFromApi)
+          });
+        }
       }
     },
     computed: {
